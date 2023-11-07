@@ -1,7 +1,6 @@
 package com.koroyan.restassuredexample.repository;
 
-import com.koroyan.restassuredexample.pojos.response.GetListByNameResult;
-import com.koroyan.restassuredexample.pojos.response.PersonIdentification;
+import com.koroyan.restassuredexample.pojos.response.*;
 
 import java.util.*;
 

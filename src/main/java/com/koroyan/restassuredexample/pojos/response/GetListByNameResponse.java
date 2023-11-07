@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class GetListByNameResponse {
+
     @XmlElement(name = "GetListByNameResult")
     private GetListByNameResult getListByNameResult;
 
@@ -19,4 +20,5 @@ public class GetListByNameResponse {
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
+
 }
