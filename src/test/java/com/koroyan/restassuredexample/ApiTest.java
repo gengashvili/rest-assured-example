@@ -1,24 +1,23 @@
 package com.koroyan.restassuredexample;
 
+import com.koroyan.restassuredexample.data.ListData;
 import com.koroyan.restassuredexample.data.dataproviders.DataProviders;
 import com.koroyan.restassuredexample.data.models.MathOperation;
-import com.koroyan.restassuredexample.enums.SOAPAction;
-import com.koroyan.restassuredexample.pojos.response.FindPersonResult;
-import com.koroyan.restassuredexample.repository.PersonRepository;
-import com.koroyan.restassuredexample.repository.PersonRepositoryImpl;
+import com.koroyan.restassuredexample.pojos.response.*;
+import com.koroyan.restassuredexample.repository.*;
 import com.koroyan.restassuredexample.steps.Step;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 public class ApiTest {
 
     Step step = new Step();
     PersonRepository personRepository = new PersonRepositoryImpl();
+    GetListByNameRepository getListByNameRepository = new GetListByNameRepositoryImpl();
 
     @Test(dataProvider = "mathOperations",dataProviderClass = DataProviders.class)
     public void addIntegerTest(MathOperation mathOperation){
@@ -48,6 +47,14 @@ public class ApiTest {
         JSONAssert.assertEquals(apiPerson.toString(),databasePerson.toString(),false);
     }
 
+    @Test
+    public void getListByNameTest() throws JSONException {
+        String name = ListData.LIST_NAME;
 
+        GetListByNameResult apiList = step.getListByName(name);
+        GetListByNameResult expectedList = getListByNameRepository.getExpectedList();
+
+        JSONAssert.assertEquals(apiList.toString(), expectedList.toString(), false);
+    }
 
 }
